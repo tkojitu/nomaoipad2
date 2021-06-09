@@ -1,11 +1,13 @@
 export default class {
-	constructor(board) {
+	constructor(board, handler) {
 		this.board = board;
+		this.handler = handler;
 	}
 
 	init() {
 		this.initGridLayout();
 		this.board.addPads();
+		this.handler.init();
 	}
 
 	initGridLayout() {

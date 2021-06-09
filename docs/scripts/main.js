@@ -1,6 +1,7 @@
 import App from "./App.js";
 import Board from "./Board.js";
 import Container from "./Container.js";
+import Handler from "./Handler.js";
 import PadText from "./PadText.js";
 import Parser from "./Parser.js";
 
@@ -11,7 +12,7 @@ window.addEventListener(
 		c.define(
 			"app",
 			function(c) {
-				return new App(c.geti("board"));
+				return new App(c.geti("board"), c.geti("handler"));
 			});
 		c.define(
 			"board",
@@ -29,6 +30,11 @@ window.addEventListener(
 			"padtext",
 			function(c) {
 				return new PadText();
+			});
+		c.define(
+			"handler",
+			function(c) {
+				return new Handler();
 			});
 		c.geti("app").init();
 	});
