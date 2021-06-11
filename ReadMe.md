@@ -15,11 +15,11 @@ A pad instrument.
 	  - Write layout css.
 	  - Write pads html.
 	+ Handle events.
-	  + add event handlers to the board.
-	    + add touchstart handler.
-	    + add touchend handler.
-	    + add touchmove handler.
-	    + add touchleave handler.
-	    + add touchcancel handler.
+	  - Add event handlers to the board.
+	    - add touchstart handler.
+	    - add touchend handler.
+	    - add touchmove handler.
+	    - add touchcancel handler.
+	  + Change pad colors.
 	+ Sound notes.
 
