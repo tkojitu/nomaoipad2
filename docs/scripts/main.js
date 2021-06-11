@@ -1,7 +1,6 @@
 import App from "./App.js";
 import Board from "./Board.js";
 import Container from "./Container.js";
-import Handler from "./Handler.js";
 import PadText from "./PadText.js";
 import Parser from "./Parser.js";
 
@@ -11,7 +10,7 @@ window.addEventListener(
 		let c = new Container();
 		c.define(
 			"app",
-			c => new App(c.geti("board"), c.geti("handler")));
+			c => new App(c.geti("board")));
 		c.define(
 			"board",
 			c => {
@@ -25,8 +24,5 @@ window.addEventListener(
 		c.define(
 			"padtext",
 			c => new PadText());
-		c.define(
-			"handler",
-			c => new Handler());
 		c.geti("app").init();
 	});

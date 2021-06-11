@@ -1,11 +1,9 @@
 export default class {
-	constructor(board, handler) {
+	constructor(board) {
 		this.board = board;
-		this.handler = handler;
 	}
 
 	init() {
 		this.board.init();
-		this.handler.init();
 	}
 }
