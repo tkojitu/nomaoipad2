@@ -1,7 +1,21 @@
+import Handler from "./Handler.js";
+
 export default class {
 	constructor(size, pads) {
 		this.padSize = size;
 		this.pads = pads;
+	}
+
+	init() {
+		this.initGridLayout();
+		this.addPads();
+		this.initHandlers();
+	}
+
+	initGridLayout() {
+		let rule = document.styleSheets[0].cssRules[0];
+		rule.style.gridTemplateRows = this.getGridTemplateRows();
+		rule.style.gridTemplateColumns = this.getGridTemplateColumns();
 	}
 
 	getRowSize() {
@@ -39,6 +53,14 @@ export default class {
 				child.innerHTML = pad;
 				parent.appendChild(child);
 			}
+		}
+	}
+
+	initHandlers() {
+		let board = document.getElementById("board");
+		for (let i = 0; i < board.children.length; ++i) {
+			let handler = new Handler();
+			handler.listen(board.children[i]);
 		}
 	}
 }
