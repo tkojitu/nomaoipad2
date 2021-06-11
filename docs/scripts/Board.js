@@ -86,23 +86,9 @@ export default class {
 	updatePads() {
 		for (let row of this.pads) {
 			for (let pad of row) {
-				pad.update(this.hitsPad(pad));
+				pad.update(this.touches);
 			}
 		}
-	}
-
-	hitsPad(pad) {
-		for (let t of this.touches) {
-			let elt = document.elementFromPoint(t.pageX, t.pageY);
-			if (elt && elt.id == pad.id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	getPadColor(hit) {
-		return hit ? "green" : "lightgreen";
 	}
 
 	onTouchMove(evt) {
