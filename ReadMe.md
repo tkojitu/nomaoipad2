@@ -14,12 +14,12 @@ A pad instrument.
 	  - Parse layout string.
 	  - Write layout css.
 	  - Write pads html.
-	+ Handle events.
+	- Handle events.
 	  - Add event handlers to the board.
 	    - add touchstart handler.
 	    - add touchend handler.
 	    - add touchmove handler.
 	    - add touchcancel handler.
-	  + Change pad colors.
+	  - Change pad colors.
 	+ Sound notes.
 

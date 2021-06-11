@@ -8,7 +8,7 @@ export default class {
 		elt.addEventListener("touchstart", evt => this.onTouchStart(evt), {passive: false});
 		elt.addEventListener("touchend", evt => this.onTouchEnd(evt), {passive: false});
 		elt.addEventListener("touchmove", evt => this.onTouchMove(evt), {passive: false});
-		elt.addEventListener("touchcancel", evt => this.onTouchCancel(evt), {passive: false});
+		elt.addEventListener("touchcancel", evt => this.onTouchEnd(evt), {passive: false});
 	}
 
 	onTouchStart(evt) {
@@ -16,11 +16,45 @@ export default class {
 		for (let t of evt.changedTouches) {
 			this.pushTouch(t);
 		}
+		this.updatePads();
 		console.log("start " + evt.target.innerHTML);
 	}
 
 	pushTouch(touch) {
-		this.touches.push(Object.assign({}, touch));
+		this.touches.push(this.copyTouch(touch));
+	}
+
+	copyTouch(touch) {
+		return {
+			identifier: touch.identifier,
+			pageX: touch.pageX,
+			pageY: touch.pageY
+		};
+	}
+
+	updatePads() {
+		let board = document.getElementById("board");
+		for (let pad of board.children) {
+			pad.style.backgroundColor = this.getPadColor(this.hitsPad(pad));
+		}
+	}
+
+	hitsPad(pad) {
+		for (let t of this.touches) {
+			let elt = document.elementFromPoint(t.pageX, t.pageY);
+			if (elt && elt.id == pad.id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	getPadColor(hit) {
+		if (hit) {
+			return "green";
+		} else {
+			return "lightgreen";
+		}
 	}
 
 	onTouchMove(evt) {
@@ -30,8 +64,9 @@ export default class {
 			if (idx < 0) {
 				continue;
 			}
-			this.touches.splice(idx, 1, Object.assign({}, t));
+			this.touches.splice(idx, 1, this.copyTouch(t));
 		}
+		this.updatePads();
 		console.log("move " + evt.target.innerHTML);
 	}
 
@@ -48,11 +83,7 @@ export default class {
 			}
 			this.touches.splice(idx, 1);
 		}
+		this.updatePads();
 		console.log("end " + evt.target.innerHTML);
-	}
-
-	onTouchCancel(evt) {
-		evt.preventDefault();
-		console.log("cancel " + evt.target.innerHTML);
 	}
 }
