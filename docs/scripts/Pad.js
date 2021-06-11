@@ -6,13 +6,12 @@ export default class {
 		this.node = null;
 	}
 
-	hitsAny(touches) {
-		for (let t of touches) {
-			let elt = document.elementFromPoint(t.pageX, t.pageY);
-			if (elt && elt.id == this.id) {
-				return true;
-			}
-		}
-		return false;
+	update(active) {
+		this.node.style.backgroundColor = this.getColor(active);
+		this.active = active;
+	}
+
+	getColor(active) {
+		return active ? "green" : "lightgreen";
 	}
 }

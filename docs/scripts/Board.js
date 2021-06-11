@@ -84,9 +84,10 @@ export default class {
 	}
 
 	updatePads() {
-		let board = document.getElementById("board");
-		for (let pad of board.children) {
-			pad.style.backgroundColor = this.getPadColor(this.hitsPad(pad));
+		for (let row of this.pads) {
+			for (let pad of row) {
+				pad.update(this.hitsPad(pad));
+			}
 		}
 	}
 
