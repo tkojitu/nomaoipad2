@@ -17,7 +17,6 @@ export default class {
 			this.pushTouch(t);
 		}
 		this.updatePads();
-		console.log("start " + evt.target.innerHTML);
 	}
 
 	pushTouch(touch) {
@@ -50,11 +49,7 @@ export default class {
 	}
 
 	getPadColor(hit) {
-		if (hit) {
-			return "green";
-		} else {
-			return "lightgreen";
-		}
+		return hit ? "green" : "lightgreen";
 	}
 
 	onTouchMove(evt) {
@@ -67,7 +62,6 @@ export default class {
 			this.touches.splice(idx, 1, this.copyTouch(t));
 		}
 		this.updatePads();
-		console.log("move " + evt.target.innerHTML);
 	}
 
 	getTouchIndex(touch) {
@@ -84,6 +78,5 @@ export default class {
 			this.touches.splice(idx, 1);
 		}
 		this.updatePads();
-		console.log("end " + evt.target.innerHTML);
 	}
 }
