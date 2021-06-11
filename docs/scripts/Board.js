@@ -8,7 +8,7 @@ export default class {
 	init() {
 		this.initGridLayout();
 		this.addPads();
-		this.listen(document.getElementById("board"));
+		// this.listen(document.getElementById("board"));
 	}
 
 	initGridLayout() {
@@ -56,66 +56,11 @@ export default class {
 		}
 	}
 
-	listen(elt) {
-		elt.addEventListener("touchstart", evt => this.onTouchStart(evt), {passive: false});
-		elt.addEventListener("touchend", evt => this.onTouchEnd(evt), {passive: false});
-		elt.addEventListener("touchmove", evt => this.onTouchMove(evt), {passive: false});
-		elt.addEventListener("touchcancel", evt => this.onTouchEnd(evt), {passive: false});
-	}
-
-	onTouchStart(evt) {
-		evt.preventDefault();
-		for (let t of evt.changedTouches) {
-			this.pushTouch(t);
-		}
-		this.updatePads();
-	}
-
-	pushTouch(touch) {
-		this.touches.push(this.copyTouch(touch));
-	}
-
-	copyTouch(touch) {
-		return {
-			identifier: touch.identifier,
-			pageX: touch.pageX,
-			pageY: touch.pageY
-		};
-	}
-
-	updatePads() {
+	update(touches) {
 		for (let row of this.pads) {
 			for (let pad of row) {
-				pad.update(this.touches);
+				pad.update(touches);
 			}
 		}
-	}
-
-	onTouchMove(evt) {
-		evt.preventDefault();
-		for (let t of evt.changedTouches) {
-			let idx = this.getTouchIndex(t);
-			if (idx < 0) {
-				continue;
-			}
-			this.touches.splice(idx, 1, this.copyTouch(t));
-		}
-		this.updatePads();
-	}
-
-	getTouchIndex(touch) {
-		return this.touches.findIndex((t) => touch.identifier == t.identifier);
-	}
-
-	onTouchEnd(evt) {
-		evt.preventDefault();
-		for (let t of evt.changedTouches) {
-			let idx = this.getTouchIndex(t);
-			if (idx < 0) {
-				continue;
-			}
-			this.touches.splice(idx, 1);
-		}
-		this.updatePads();
 	}
 }
