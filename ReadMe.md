@@ -25,4 +25,4 @@ A pad instrument.
 	  + Convert note strings to frequencies.
 	  + Create a oscillator when a pad becomes active and start it.
 	  + Stop the oscillator when the pad becomes inactive and forget it.
-	+ Use hidden div for note layout.
+	- Use hidden div for note layout.
