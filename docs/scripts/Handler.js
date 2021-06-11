@@ -1,4 +1,8 @@
 export default class {
+	init() {
+		this.listen(document.getElementById("board"));
+	}
+
 	listen(elt) {
 		elt.addEventListener("touchstart", evt => this.onTouchStart(evt), {passive: false});
 		elt.addEventListener("touchend", evt => this.onTouchEnd(evt), {passive: false});

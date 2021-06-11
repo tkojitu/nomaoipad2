@@ -1,5 +1,3 @@
-import Handler from "./Handler.js";
-
 export default class {
 	constructor(size, pads) {
 		this.padSize = size;
@@ -9,7 +7,6 @@ export default class {
 	init() {
 		this.initGridLayout();
 		this.addPads();
-		this.initHandlers();
 	}
 
 	initGridLayout() {
@@ -53,14 +50,6 @@ export default class {
 				child.innerHTML = pad;
 				parent.appendChild(child);
 			}
-		}
-	}
-
-	initHandlers() {
-		let board = document.getElementById("board");
-		for (let i = 0; i < board.children.length; ++i) {
-			let handler = new Handler();
-			handler.listen(board.children[i]);
 		}
 	}
 }
