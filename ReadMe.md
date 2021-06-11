@@ -6,16 +6,20 @@ A pad instrument.
 
 ## To Do
 
-	+ Layout pads.
-	  + Decide layout syntax.
-	    + row
-	    + column
-	    + size
-	  + Parse layout string.
-	  + Write layout css.
-	  + Write pads html.
-	+ Connect pads
-	  + Convert pad-ids to notes.
-	  + Handle events.
-	  + Sound notes.
+	- Layout pads.
+	  - Decide layout syntax.
+	    - row
+	    - column
+	    - size
+	  - Parse layout string.
+	  - Write layout css.
+	  - Write pads html.
+	+ Handle events.
+	  + add event handlers to the board.
+	    + add touchstart handler.
+	    + add touchend handler.
+	    + add touchmove handler.
+	    + add touchleave handler.
+	    + add touchcancel handler.
+	+ Sound notes.
 
