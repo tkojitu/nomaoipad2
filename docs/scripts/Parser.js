@@ -7,7 +7,7 @@ export default class {
 	parse(text) {
 		let lines = text.split("\n");
 		this.size = lines.shift();
-		this.pads = lines.map(function(ln) {return ln.split(/\s+/)});
+		this.pads = lines.map(ln => ln.split(/\s+/));
 	}
 
 	getSize() {
