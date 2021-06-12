@@ -148,7 +148,7 @@ export default class {
 	 return new Emitter(pid, nid, this);
 	}
 
-	startAudioNode(pid, freq) {
+	noteOn(pid, freq) {
 		if (this.oscs.has(pid)) {
 			return;
 		}
@@ -165,7 +165,7 @@ export default class {
 		return osc;
 	}
 
-	stopAudioNode(pid, osc) {
+	noteOff(pid, osc) {
 		let o = this.oscs.get(pid);
 		o.stop();
 		o.disconnect();

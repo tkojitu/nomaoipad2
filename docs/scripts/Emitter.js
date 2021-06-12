@@ -7,11 +7,11 @@ export default class {
 
 	noteOn() {
 		console.log("note on " + this.nid);
-		this.juke.startAudioNode(this.pid, this.nid);
+		this.juke.noteOn(this.pid, this.nid);
 	}
 
 	noteOff() {
 		console.log("note off " + this.nid);
-		this.juke.stopAudioNode(this.pid, this.anode);
+		this.juke.noteOff(this.pid, this.anode);
 	}
 }
