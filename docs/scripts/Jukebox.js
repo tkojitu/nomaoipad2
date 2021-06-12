@@ -132,7 +132,7 @@ export default class {
 			12543.8539514160 // 127
 		];
 		this.gain = this.connectGain();
-		this.oscs = new Map();
+		this.anodes = new Map();
 	}
 
 	connectGain() {
@@ -143,13 +143,13 @@ export default class {
 	}
 
 	noteOn(pid, nid) {
-		if (this.oscs.has(pid)) {
+		if (this.anodes.has(pid)) {
 			return;
 		}
 		let osc = this.makeOscillator(nid);
 		osc.connect(this.gain);
 		osc.start();
-		this.oscs.set(pid, osc);
+		this.anodes.set(pid, osc);
 		console.log("note on " + pid);
 	}
 
@@ -161,10 +161,10 @@ export default class {
 	}
 
 	noteOff(pid) {
-		let o = this.oscs.get(pid);
+		let o = this.anodes.get(pid);
 		o.stop();
 		o.disconnect();
-		this.oscs.delete(pid);
+		this.anodes.delete(pid);
 		console.log("note off " + pid);
 	}
 }
