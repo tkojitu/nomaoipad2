@@ -1,4 +1,3 @@
-import App from "./App.js";
 import Board from "./Board.js";
 import Container from "./Container.js";
 import Jukebox from "./Jukebox.js";
@@ -9,9 +8,6 @@ window.addEventListener(
 	"load",
 	function() {
 		let c = new Container();
-		c.define(
-			"app",
-			c => new App(c.geti("board"), c.geti("listener")));
 		c.define(
 			"board",
 			c => {
@@ -28,5 +24,6 @@ window.addEventListener(
 		c.define(
 			"juke",
 			c => new Jukebox());
-		c.geti("app").init();
+		c.geti("board").init();
+		c.geti("listener").init();
 	});
