@@ -6,7 +6,7 @@ export default class {
 		this.juke = juke
 		this.active = false;
 		this.node = null;
-		this.emitter = juke.newEmitter(nid);
+		this.emitter = juke.newEmitter(pid, nid);
 	}
 
 	update(touches) {

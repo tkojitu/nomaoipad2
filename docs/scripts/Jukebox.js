@@ -134,6 +134,7 @@ export default class {
 			12543.8539514160 // 127
 		];
 		this.gain = this.connectGain();
+		this.oscs = new Map();
 	}
 
 	connectGain() {
@@ -143,15 +144,18 @@ export default class {
 		return gain;
 	}
 
-	newEmitter(nid) {
-	 return new Emitter(nid, this);
+	newEmitter(pid, nid) {
+	 return new Emitter(pid, nid, this);
 	}
 
-	startAudioNode(freq) {
+	startAudioNode(pid, freq) {
+		if (this.oscs.has(pid)) {
+			return;
+		}
 		let osc = this.makeOscillator(freq);
 		osc.connect(this.gain);
 		osc.start();
-		return osc;
+		this.oscs.set(pid, osc);
 	}
 
 	makeOscillator(nid) {
@@ -161,8 +165,10 @@ export default class {
 		return osc;
 	}
 
-	stopAudioNode(osc) {
-		osc.stop();
-		osc.disconnect();
+	stopAudioNode(pid, osc) {
+		let o = this.oscs.get(pid);
+		o.stop();
+		o.disconnect();
+		this.oscs.delete(pid);
 	}
 }
