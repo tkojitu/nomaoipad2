@@ -6,7 +6,6 @@ export default class {
 		this.juke = juke
 		this.active = false;
 		this.node = null;
-		this.emitter = juke.newEmitter(pid, nid);
 	}
 
 	update(touches) {
@@ -16,9 +15,9 @@ export default class {
 			return;
 		}
 		if (active) {
-			this.emitter.noteOn();
+			this.juke.noteOn(this.pid, this.nid);
 		} else {
-			this.emitter.noteOff();
+			this.juke.noteOff(this.pid);
 		}
 		this.active = active;
 	}

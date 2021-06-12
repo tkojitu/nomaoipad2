@@ -1,5 +1,3 @@
-import Emitter from "./Emitter.js";
-
 export default class {
 	constructor() {
 		this.ax = new AudioContext();
@@ -144,18 +142,15 @@ export default class {
 		return gain;
 	}
 
-	newEmitter(pid, nid) {
-	 return new Emitter(pid, nid, this);
-	}
-
-	noteOn(pid, freq) {
+	noteOn(pid, nid) {
 		if (this.oscs.has(pid)) {
 			return;
 		}
-		let osc = this.makeOscillator(freq);
+		let osc = this.makeOscillator(nid);
 		osc.connect(this.gain);
 		osc.start();
 		this.oscs.set(pid, osc);
+		console.log("note on " + pid);
 	}
 
 	makeOscillator(nid) {
@@ -165,10 +160,11 @@ export default class {
 		return osc;
 	}
 
-	noteOff(pid, osc) {
+	noteOff(pid) {
 		let o = this.oscs.get(pid);
 		o.stop();
 		o.disconnect();
 		this.oscs.delete(pid);
+		console.log("note off " + pid);
 	}
 }
