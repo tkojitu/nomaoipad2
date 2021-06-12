@@ -8,7 +8,6 @@ export default class {
 	init() {
 		this.initGridLayout();
 		this.addPads();
-		// this.listen(document.getElementById("board"));
 	}
 
 	initGridLayout() {

@@ -1,14 +1,25 @@
 export default class {
-	constructor(id, note) {
+	constructor(id, note, nid, juke) {
 		this.id = id;
 		this.note = note;
+		this.nid = nid;
+		this.juke = juke
 		this.active = false;
 		this.node = null;
+		this.emitter = juke.newEmitter(nid);
 	}
 
 	update(touches) {
 		let active = this.hitsAny(touches);
 		this.node.style.backgroundColor = this.getColor(active);
+		if (this.active == active) {
+			return;
+		}
+		if (active) {
+			this.emitter.noteOn();
+		} else {
+			this.emitter.noteOff();
+		}
 		this.active = active;
 	}
 

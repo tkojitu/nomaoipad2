@@ -1,6 +1,7 @@
 import App from "./App.js";
 import Board from "./Board.js";
 import Container from "./Container.js";
+import Jukebox from "./Jukebox.js";
 import Listener from "./Listener.js";
 import Parser from "./Parser.js";
 
@@ -20,9 +21,12 @@ window.addEventListener(
 			});
 		c.define(
 			"parser",
-			c => new Parser());
+			c => new Parser(c.geti("juke")));
 		c.define(
 			"listener",
 			c => new Listener(c.geti("board")));
+		c.define(
+			"juke",
+			c => new Jukebox());
 		c.geti("app").init();
 	});
