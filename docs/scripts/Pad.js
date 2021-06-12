@@ -1,6 +1,6 @@
 export default class {
-	constructor(id, note, nid, juke) {
-		this.id = id;
+	constructor(pid, note, nid, juke) {
+		this.pid = pid;
 		this.note = note;
 		this.nid = nid;
 		this.juke = juke
@@ -26,7 +26,7 @@ export default class {
 	hitsAny(touches) {
 		for (let t of touches) {
 			let elt = document.elementFromPoint(t.pageX, t.pageY);
-			if (elt && elt.id == this.id) {
+			if (elt && elt.id == this.pid) {
 				return true;
 			}
 		}

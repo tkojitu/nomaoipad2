@@ -46,7 +46,7 @@ export default class {
 		for (let row of this.pads) {
 			for (let pad of row) {
 				let child = document.createElement("div");
-				child.id = pad.id;
+				child.id = pad.pid;
 				child.className = "pad";
 				child.innerHTML = pad.note;
 				parent.appendChild(child);
