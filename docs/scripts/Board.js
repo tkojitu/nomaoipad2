@@ -55,11 +55,16 @@ export default class {
 		}
 	}
 
-	update(touches) {
+	updatePads(touches) {
 		for (let row of this.pads) {
 			for (let pad of row) {
 				pad.update(touches);
 			}
 		}
+	}
+
+	changePadSize(size) {
+		this.padSize = size;
+		this.initGridLayout();
 	}
 }
