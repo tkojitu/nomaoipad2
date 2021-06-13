@@ -21,8 +21,8 @@ A pad instrument.
 	    - touchmove.
 	    - touchcancel.
 	  - Change pad colors.
-	+ Sound notes.
+	- Sound notes.
 	  - Convert note string to note id.
-	  + Create a oscillator when a pad becomes active and start it.
-	  + Stop the oscillator when the pad becomes inactive and forget it.
+	  - Create a oscillator when a pad becomes active and start it.
+	  - Stop the oscillator when the pad becomes inactive and forget it.
 	- Use hidden div for note layout.
