@@ -12,8 +12,7 @@ window.addEventListener(
 			"board",
 			c => {
 				let parser = c.geti("parser");
-				parser.parse();
-				return new Board(parser.getSize(), parser.getPads());
+				return new Board(parser.parse());
 			});
 		c.define(
 			"parser",

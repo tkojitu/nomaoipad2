@@ -1,11 +1,14 @@
 export default class {
-	constructor(size, pads) {
-		this.padSize = size;
-		this.pads = pads;
+	constructor(layouts) {
+		this.layouts = layouts;
+		this.pads = layouts[0];
+		this.padSize = "100px";
 		this.touches = [];
 	}
 
 	init() {
+		this.updatePadSize();
+		this.updateLayout();
 		this.initGridLayout();
 		this.addPads();
 	}
@@ -31,7 +34,7 @@ export default class {
 	getGridTemplateColumns() {
 		return this.iterateSize(this.getColumnSize());
 	}
-	
+
 	iterateSize(n) {
 		let buf = "";
 		for (let i = 0; i < n; ++i) {
@@ -66,5 +69,53 @@ export default class {
 	changePadSize(size) {
 		this.padSize = size;
 		this.initGridLayout();
+	}
+
+	updatePadSize() {
+		let sz = this.getSelectedPadSize();
+		if (!sz) {
+			return;
+		}
+		this.padSize = sz;
+	}
+
+	getSelectedPadSize() {
+		let sel = document.getElementById("padSizeMenu");
+		for (let opt of sel.children) {
+			if (opt.selected) {
+				return opt.value;
+			}
+		}
+		return null;
+	}
+
+	changeLayout(index) {
+		this.clearPads();
+		this.init();
+	}
+
+	clearPads() {
+		let board = document.getElementById("board");
+		while (board.firstChild) {
+			board.removeChild(board.firstChild);
+		}
+	}
+
+	updateLayout() {
+		let idx = this.getSelectedLayoutIndex();
+		if (idx < 0) {
+			return;
+		}
+		this.pads = this.layouts[idx];
+	}
+
+	getSelectedLayoutIndex() {
+		let sel = document.getElementById("layoutMenu");
+		for (let opt of sel.children) {
+			if (opt.selected) {
+				return parseInt(opt.value);
+			}
+		}
+		return null;
 	}
 }

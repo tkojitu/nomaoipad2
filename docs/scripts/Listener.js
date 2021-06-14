@@ -1,12 +1,15 @@
 export default class {
 	constructor(board) {
 		this.board = board;
+		this.pressing = false;
 		this.touches = [];
 	}
 
 	init() {
 		this.addTouchListeners();
-		this.addSelectListener();
+		this.addMouseListeners();
+		this.addLayoutMenuListener();
+		this.addPadSizeMenuListener();
 	}
 
 	addTouchListeners() {
@@ -17,9 +20,22 @@ export default class {
 		elt.addEventListener("touchcancel", evt => this.onTouchEnd(evt), {passive: false});
 	}
 
-	addSelectListener() {
-		let elt = document.getElementById("padSize");
-		elt.addEventListener("change", evt => this.onChange(evt), false);
+	addMouseListeners() {
+		let elt = document.getElementById("board");
+		elt.addEventListener("mousedown", evt => this.onMouseDown(evt), {passive: false});
+		elt.addEventListener("mouseup", evt => this.onMouseUp(evt), {passive: false});
+		elt.addEventListener("mousemove", evt => this.onMouseMove(evt), {passive: false});
+		elt.addEventListener("mouseleave", evt => this.onMouseUp(evt), {passive: false});
+	}
+
+	addLayoutMenuListener() {
+		let elt = document.getElementById("layoutMenu");
+		elt.addEventListener("change", evt => this.onChangeLayoutMenu(evt), false);
+	}
+
+	addPadSizeMenuListener() {
+		let elt = document.getElementById("padSizeMenu");
+		elt.addEventListener("change", evt => this.onChangePadSizeMenu(evt), false);
 	}
 
 	onTouchStart(evt) {
@@ -74,7 +90,34 @@ export default class {
 		this.updatePads();
 	}
 
-	onChange(evt) {
+	onMouseDown(evt) {
+		evt.preventDefault();
+		this.pressing = true;
+		this.pushTouch(evt);
+		this.updatePads();
+	}
+
+	onMouseMove(evt) {
+		evt.preventDefault();
+		if (!this.pressing) {
+			return;
+		}
+		this.touches.splice(0, 1, this.copyTouch(evt));
+		this.updatePads();
+	}
+
+	onMouseUp(evt) {
+		evt.preventDefault();
+		this.pressing = false;
+		this.touches.splice(0, 1);
+		this.updatePads();
+	}
+
+	onChangeLayoutMenu(evt) {
+		this.board.changeLayout(evt.target.value);
+	}
+
+	onChangePadSizeMenu(evt) {
 		this.board.changePadSize(evt.target.value);
 	}
 }
