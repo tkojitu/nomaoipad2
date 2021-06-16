@@ -131,6 +131,7 @@ export default class {
 			11839.8215267723,
 			12543.8539514160 // 127
 		];
+		this.soundType = "square";
 		this.gain = this.connectGain();
 		this.anodes = new Map();
 	}
@@ -155,7 +156,7 @@ export default class {
 
 	makeOscillator(nid) {
 		let osc = this.ax.createOscillator();
-		osc.type = "square";
+		osc.type = this.soundType;
 		osc.frequency.value = this.freqs[nid];
 		return osc;
 	}

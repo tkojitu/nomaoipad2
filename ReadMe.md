@@ -6,6 +6,7 @@ A pad instrument.
 
 ## To Do
 
+	- Add sound type menu.
 	- Add layouts.
 	- Add menu to change pad size.
 	- Layout pads.

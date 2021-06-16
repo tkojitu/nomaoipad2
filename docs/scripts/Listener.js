@@ -8,8 +8,7 @@ export default class {
 	init() {
 		this.addTouchListeners();
 		this.addMouseListeners();
-		this.addLayoutMenuListener();
-		this.addPadSizeMenuListener();
+		this.addMenuListeners();
 	}
 
 	addTouchListeners() {
@@ -26,6 +25,17 @@ export default class {
 		elt.addEventListener("mouseup", evt => this.onMouseUp(evt), {passive: false});
 		elt.addEventListener("mousemove", evt => this.onMouseMove(evt), {passive: false});
 		elt.addEventListener("mouseleave", evt => this.onMouseUp(evt), {passive: false});
+	}
+
+	addMenuListeners() {
+		this.addSoundMenuListener();
+		this.addLayoutMenuListener();
+		this.addPadSizeMenuListener();
+	}
+
+	addSoundMenuListener() {
+		let elt = document.getElementById("soundTypeMenu");
+		elt.addEventListener("change", evt => this.onChangeSoundMenu(evt), false);
 	}
 
 	addLayoutMenuListener() {
@@ -119,5 +129,9 @@ export default class {
 
 	onChangePadSizeMenu(evt) {
 		this.board.changePadSize(evt.target.value);
+	}
+
+	onChangeSoundMenu(evt) {
+		this.board.changeSoundType(evt.target.value);
 	}
 }

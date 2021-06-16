@@ -1,5 +1,6 @@
 export default class {
-	constructor(layouts) {
+	constructor(jukebox, layouts) {
+		this.jukebox = jukebox;
 		this.layouts = layouts;
 		this.pads = layouts[0];
 		this.padSize = "100px";
@@ -10,6 +11,7 @@ export default class {
 		this.updatePadSize();
 		this.updateLayout();
 		this.initGridLayout();
+		this.updateSoundType();
 		this.addPads();
 	}
 
@@ -80,13 +82,7 @@ export default class {
 	}
 
 	getSelectedPadSize() {
-		let sel = document.getElementById("padSizeMenu");
-		for (let opt of sel.children) {
-			if (opt.selected) {
-				return opt.value;
-			}
-		}
-		return null;
+		return this.getSelectedValue("padSizeMenu");
 	}
 
 	changeLayout(index) {
@@ -110,10 +106,34 @@ export default class {
 	}
 
 	getSelectedLayoutIndex() {
-		let sel = document.getElementById("layoutMenu");
+		let val = this.getSelectedValue("layoutMenu");
+		if (!val) {
+			return 0;
+		}
+		return parseInt(val);
+	}
+
+	changeSoundType(value) {
+		this.jukebox.soundType = value;
+	}
+
+	updateSoundType() {
+		let st = this.getSelectedSoundType();
+		if (!st) {
+			return;
+		}
+		this.jukebox.soundType = st;
+	}
+
+	getSelectedSoundType() {
+		return this.getSelectedValue("soundTypeMenu");
+	}
+
+	getSelectedValue(id) {
+		let sel = document.getElementById(id);
 		for (let opt of sel.children) {
 			if (opt.selected) {
-				return parseInt(opt.value);
+				return opt.value;
 			}
 		}
 		return null;

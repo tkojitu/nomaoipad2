@@ -12,16 +12,16 @@ window.addEventListener(
 			"board",
 			c => {
 				let parser = c.geti("parser");
-				return new Board(parser.parse());
+				return new Board(c.geti("jukebox"), parser.parse());
 			});
 		c.define(
 			"parser",
-			c => new Parser(c.geti("juke")));
+			c => new Parser(c.geti("jukebox")));
 		c.define(
 			"listener",
 			c => new Listener(c.geti("board")));
 		c.define(
-			"juke",
+			"jukebox",
 			c => new Jukebox());
 		c.geti("board").init();
 		c.geti("listener").init();
